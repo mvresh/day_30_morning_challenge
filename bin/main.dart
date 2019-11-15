@@ -13,5 +13,47 @@
 
 /// Create a function that returns true if every single sub-array inside an array
 /// can be nested Matroyshka style, and false otherwise.
+///
+import 'dart:math';
+import 'package:collection/collection.dart';
+
+bool areUnique(List<int> list) {
+  return list.toSet().length == list.length;
+}
+
+bool areMatroyshkaStyled(List<List<int>> givenList) {
+  List<List<int>> minMaxList = givenList
+      .map((List<int> list) => [list.reduce(min), list.reduce(max)])
+      .toList();
+
+  if (areUnique(minMaxList.map((List<int> list) => list[0]).toList()) &&
+      areUnique(minMaxList.map((List<int> list) => list[0]).toList())) {
+    List<List<int>> minMaxListCopy = []..addAll(minMaxList);
+
+    minMaxList.sort((a, b) => a[0].compareTo(b[0]));
+    //print(minMaxList);
+
+    minMaxListCopy.sort((a, b) => b[1].compareTo(a[1]));
+    //print(minMaxListCopy);
+
+    return ListEquality().equals(minMaxList, minMaxListCopy);
+  }
+  else{
+    return false;
+  }
+}
+
 main() {
+  print(areMatroyshkaStyled([
+    [2, 15, 16, 20],
+    [2, 15],
+    [3, 10],
+    [4, 5]
+  ]));
+  print(areMatroyshkaStyled([
+    [1, 5],
+    [2, 6],
+    [3, 7],
+    [4, 8]
+  ]));
 }
