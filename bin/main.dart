@@ -27,7 +27,7 @@ bool areMatroyshkaStyled(List<List<int>> givenList) {
       .toList();
 
   if (areUnique(minMaxList.map((List<int> list) => list[0]).toList()) &&
-      areUnique(minMaxList.map((List<int> list) => list[0]).toList())) {
+      areUnique(minMaxList.map((List<int> list) => list[1]).toList())) {
     List<List<int>> minMaxListCopy = []..addAll(minMaxList);
 
     minMaxList.sort((a, b) => a[0].compareTo(b[0]));
